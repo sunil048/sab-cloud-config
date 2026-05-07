@@ -28,18 +28,18 @@ services:
     environment:
       - EUREKA_SERVER=http://reg:8886/eureka
 
-  sab-exeed-services:
-    image: tiger123/sab-exceed-services:master
-    container_name: sab-exceed-services
+  sab-exceed-services:
+    image: tiger123/sab-exceed-service:master
+    container_name: PROD-sab-exceed-service
     ports:
-      - "5005:8082"
+      - "5001:8082"
     networks:
       - sab-network-dev
     depends_on:
       - registry
       - config-server
     environment:
-      - EUREKA_SERVER=http://reg:8886/eureka
+      - EUREKA_SERVER=http://reg:8761/eureka
     extra_hosts:
       - "host.docker.internal:host-gateway"
 networks:
