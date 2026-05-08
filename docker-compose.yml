@@ -37,8 +37,9 @@ services:
     networks:
       - kafka-net
 
-  springboot-app:
-    image: tiger123/alert-notify:latest
+  PROD-sab-notification-service:
+    image: tiger123/sab-notification-service:master
+    container_name: PROD-sab-notification-service
     ports:
       - "8081:8081"
     networks:
