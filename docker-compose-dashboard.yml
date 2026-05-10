@@ -1,0 +1,27 @@
+version: '3'
+services:
+  config-server:
+    image: tiger123/config-server:master
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - sab-network-dev
+  dashboard:
+    image: tiger123/sab-dashboard-service:master
+    container_name: sab-dashboard-service
+    ports:
+      - "9001:9001"
+    networks:
+      - sab-network-dev
+  sab-process-service:
+    image: tiger123/sab-process-service:master
+    container_name: sab-process-service
+    ports:
+      - "5002:8081"
+    networks:
+      - sab-network-dev
+
+networks:
+  sab-network-dev:
+    external: true
