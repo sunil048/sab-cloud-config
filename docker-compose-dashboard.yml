@@ -7,6 +7,13 @@ services:
       - "8888:8888"
     networks:
       - sab-network-dev
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - sab-network-dev
   dashboard:
     image: tiger123/sab-dashboard-service:master
     container_name: sab-dashboard-service
@@ -21,6 +28,13 @@ services:
       - "5002:8081"
     networks:
       - sab-network-dev
+    environment:
+      # This is the most important line - it must match your service name 'redis'
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+      # This tells Spring Cloud to allow these variables to win over Config Server
+      - SPRING_CLOUD_CONFIG_OVERRIDE-SYSTEM-PROPERTIES=true
+      - SPRING_CLOUD_CONFIG_ALLOW-OVERRIDE=true
 
 networks:
   sab-network-dev:
